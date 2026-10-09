@@ -1,0 +1,19 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/proxy
+- name: Launch the reverse proxy
+  community.docker.docker_container:
+    name: proxy
+    image: frangipanne/tp-devops-httpd:latest
+    state: started
+    restart_policy: always
+
+    env:
+      APP_HOST: app
+      APP_PORT: daif.moindjie.takima.school
+    
+    networks:
+      - name: app_network
+  
+  vars:
+    ansible_python_interpreter: /opt/docker_venv/bin/python3

@@ -1,0 +1,22 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/app
+- name: Launch the app
+  community.docker.docker_container:
+    name: app
+    image: frangipanne/tp-devops-simple-api:latest
+    state: started
+    restart_policy: always
+
+    env:
+      DB_HOST: database
+      DB_PORT: "5432"
+      DB_USER: usr
+      DB_PASSWORD: pwd
+      DB_NAME: db
+    
+    networks:
+      - name: app_network
+  
+  vars:
+    ansible_python_interpreter: /opt/docker_venv/bin/python3
