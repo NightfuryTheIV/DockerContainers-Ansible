@@ -6,5 +6,5 @@
     - docker
     - network
     - database
-    - app
-    - httpd
+    - backend
+    - proxy

@@ -3,7 +3,7 @@
 # tasks file for roles/app
 - name: Launch the app
   community.docker.docker_container:
-    name: app
+    name: backend
     image: frangipanne/tp-devops-simple-api:latest
     state: started
     restart_policy: always

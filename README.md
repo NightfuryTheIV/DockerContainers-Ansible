@@ -6,4 +6,4 @@ I also did the docker installation in the installdocker.yml on Ubuntu instead of
 3-2: I moved all of the tasks from installdocker.yml to main.yml in roles/docker/tasks and I added roles: - docker
 
 
-# commande pour aide: ansible-playbook -i inventories/setup.yml installdocker.yml (depuis le dossier ansible et à run sur ubuntu pas debian)
+# UPDATE: j'ai réussi à régler mon probleme
