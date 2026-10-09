@@ -5,6 +5,7 @@
   community.docker.docker_container:
     name: proxy
     image: "frangipanne/tp-devops-httpd:latest"
+    pull: true
     state: started
     restart_policy: always
     

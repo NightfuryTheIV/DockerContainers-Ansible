@@ -60,3 +60,30 @@ jobs:
           context: ./tp2-http
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-httpd:latest
           push: ${{ github.ref == 'refs/heads/main' }}
+
+  deploy:
+    needs: build-and-push-docker-image
+    # only deploy on pushes to main, never on develop or pull requests
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ansible and the Docker collection
+        run: |
+          pip install ansible
+          ansible-galaxy collection install community.docker
+
+      - name: Write SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Deploy with Ansible
+        working-directory: ./ansible   # folder that contains playbook.yml, inventory and roles/
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        run: |
+          ansible-playbook -i inventories/setup.yml installdocker.yml -e ansible_ssh_private_key_file=~/.ssh/id_rsa

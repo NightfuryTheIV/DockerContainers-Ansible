@@ -5,6 +5,7 @@
   community.docker.docker_container:
     name: database
     image: frangipanne/tp-devops-database:latest
+    pull: true
     state: started
     restart_policy: always
 

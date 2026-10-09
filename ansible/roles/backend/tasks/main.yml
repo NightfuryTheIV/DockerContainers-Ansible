@@ -5,6 +5,7 @@
   community.docker.docker_container:
     name: backend
     image: frangipanne/tp-devops-simple-api:latest
+    pull: true
     state: started
     restart_policy: always
 
