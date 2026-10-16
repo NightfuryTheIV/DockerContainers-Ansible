@@ -1,3 +1,5 @@
+# I used WSL Ubuntu to make this so it might not work as intended on Debian
+
 ### There is a possibility that accessing venv is required. If it is, access with `source .venv/bin/activate` from the root (Dockeransible)
 ### If venv doesn't work, reinstall it by running succssively (from Dockeransible):
 ```
